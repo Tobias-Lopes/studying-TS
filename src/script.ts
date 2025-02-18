@@ -1,4 +1,3 @@
-export function sum(a: number, b: number) {
-  console.log('Dentro do escopo de módulo');
-  return { Result: a + b };
-}
+import { bootstrap } from './module/basic-types/intersection-type.js';
+
+export { bootstrap };
