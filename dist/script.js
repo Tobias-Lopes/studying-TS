@@ -1,2 +1,3 @@
-import { bootstrap } from './module/narrowing/truthy-and-false.js';
+import { bootstrap } from './module/narrowing/type-assertion.js';
 export { bootstrap };
+//export const bootstrap = (): void => {};
