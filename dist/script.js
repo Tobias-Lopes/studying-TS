@@ -1,3 +1,3 @@
-import { bootstrap } from './module/narrowing/type-assertion.js';
+import { bootstrap } from './module/narrowing/type-never.js';
 export { bootstrap };
 //export const bootstrap = (): void => {};
