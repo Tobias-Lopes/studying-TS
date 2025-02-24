@@ -1,4 +1,4 @@
-import { bootstrap } from './module/narrowing/type-never.js';
+import { bootstrap } from './module/interface/extends.js';
 
 export { bootstrap };
 //export const bootstrap = (): void => {};
