@@ -1,3 +1,3 @@
-import { bootstrap } from './module/utility-types/readonly.js';
+import { bootstrap } from './module/classes/overloading.js';
 export { bootstrap };
 //export const bootstrap = (): void => {};
