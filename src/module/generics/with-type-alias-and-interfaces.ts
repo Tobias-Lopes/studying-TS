@@ -1,13 +1,24 @@
 export const bootstrap = (): void => {
-  interface TableProps {
-    data: Game[];
+  interface TablePropsInterface<T> {
+    data: T[];
     columns: Array<{
       header: string;
-      accessor: (item: Game) => string | number;
+      accessor: (item: T) => string | number;
     }>;
   }
 
-  function creatTable({ data, columns }: TableProps): HTMLTableElement {
+  type TablePropsTypeAlias<T> = {
+    data: T[];
+    columns: Array<{
+      header: string;
+      accessor: (item: T) => string | number;
+    }>;
+  };
+
+  function createTable<T>({
+    data,
+    columns,
+  }: TablePropsInterface<T>): HTMLTableElement {
     const table = document.createElement('table');
     table.setAttribute('border', '1');
 
@@ -52,7 +63,7 @@ export const bootstrap = (): void => {
     { id: '2', title: 'Astro Bot', price: 150 },
   ];
 
-  const table = creatTable({
+  const table = createTable({
     data: games,
     columns: [
       { header: 'ID', accessor: (game: Game) => game.id },
@@ -61,4 +72,28 @@ export const bootstrap = (): void => {
     ],
   });
   document.body.appendChild(table);
+
+  //
+  interface Movie {
+    id: number;
+    title: string;
+    genre: string;
+    year: number;
+  }
+
+  const movies: Movie[] = [
+    { id: 1, title: 'Gladiador', genre: 'Drama, ação e aventura', year: 2000 },
+    { id: 2, title: 'A Lista de Schindler', genre: 'Drama', year: 1993 },
+  ];
+
+  const tableMovies = createTable({
+    data: movies,
+    columns: [
+      { header: 'ID', accessor: (movie: Movie) => movie.id },
+      { header: 'Título', accessor: (movie: Movie) => movie.title },
+      { header: 'Gênero', accessor: (movie: Movie) => movie.genre },
+      { header: 'Ano', accessor: (movie: Movie) => movie.year },
+    ],
+  });
+  document.body.appendChild(tableMovies);
 };

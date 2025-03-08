@@ -1,3 +1,3 @@
-import { bootstrap } from './module/generics/with-type-alias-and-interfaces.js';
+import { bootstrap } from './module/generics/with-promises-and-assync.js';
 export { bootstrap };
 //export const bootstrap = (): void => {};

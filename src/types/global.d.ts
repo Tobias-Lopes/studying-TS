@@ -21,3 +21,19 @@ interface Theme {
   colorScheme: ColorScheme;
   layout: Layout;
 }
+
+interface Game {
+  id: number;
+  title: string;
+  genre: string;
+  year: number;
+}
+
+interface Car {
+  id: number;
+  brand: string;
+  model: string;
+  year: number;
+  type: string;
+  engine: string;
+}
