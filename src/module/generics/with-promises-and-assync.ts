@@ -1,56 +1,26 @@
 import { isCarArray, isGameArray } from '../../utils/typePredicates.js';
 
-export const bootstrap = (): void => {
-  function fetchData<T>(
+export const bootstrap = async (): Promise<void> => {
+  async function fetchData<T>(
     url: string,
     typePredicateCallback: (data: any) => boolean,
   ): Promise<T | null> {
-    return fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          console.error(
-            'ERROR HTTP: ',
-            `${response.status} - ${response.statusText}`,
-          );
-        }
+    const resp = await fetch(url);
+    if (!resp.ok) {
+      console.error('ERROR HTTP: ', `${resp.status} - ${resp.statusText}`);
+      return null;
+    }
 
-        return response.json();
-      })
-      .then((data) => {
-        if (typePredicateCallback(data)) {
-          return data as T;
-        } else {
-          return null;
-        }
-      });
+    const data = await resp.json();
+    return typePredicateCallback(data) ? (data as T) : null;
   }
 
-  const respGames = fetchData<Game[]>(
-    'https://argus-academy.com/mock/api/games/',
-    isGameArray,
-  );
-  respGames.then((data) => console.log(data));
-
-  const respCars = fetchData<Car[]>(
+  const dataCars = await fetchData<Car[]>(
     'https://argus-academy.com/mock/api/cars/',
     isCarArray,
   );
-  respCars.then((data) => console.log(data));
+  console.log(dataCars);
+  console.log(
+    'Funções assíncronas são executadas em paralelo até que sejam resolvidas (com sucesso ou rejeição), isso faz com que o fluxo de execução da aplicação não fique aguardando e siga em frente',
+  );
 };
-
-/*//Promise
-  const promise = new Promise((resolve, reject) => {
-    if (false) {
-      reject('Rejeitada');
-    }
-
-    resolve('Resolvida');
-  });
-
-  // Função assíncrona (Promise)
-  async function promiseFunction() {
-    return 200;
-  }
-
-  promiseFunction();
-  */
